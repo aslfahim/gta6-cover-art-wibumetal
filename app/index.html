@@ -3,20 +3,57 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cover Snap</title>
+<title>Palm Noir — GTA-style cover maker</title>
 <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 <main class="app">
-  <section class="controls">
-    <h1>Cover Snap</h1>
-    <p>A photo and a caption, made into a square cover.</p>
-    <label>Photo <input id="photo" type="file" accept="image/*"></label>
-    <label>Caption <input id="caption" type="text" maxlength="40" value="Sunset Heist"></label>
-    <button id="export" type="button">Export PNG 1080 x 1080</button>
+  <section class="controls" aria-label="Cover editor controls">
+    <h1>Palm Noir</h1>
+    <p class="tagline">A dark noir cover maker. Two panels, one caption, teal-orange night grade.</p>
+
+    <fieldset class="panel-box" id="panel-a-box">
+      <legend>Left panel — palms</legend>
+      <label class="file-label">Photo <input id="photo-a" type="file" accept="image/*"></label>
+      <label>Zoom <input id="zoom-a" type="range" min="1" max="3" step="0.01" value="1.15"></label>
+      <p class="hint">Drag the left half of the preview to pan the photo.</p>
+    </fieldset>
+
+    <fieldset class="panel-box" id="panel-b-box">
+      <legend>Right panel — figure</legend>
+      <label class="file-label">Photo <input id="photo-b" type="file" accept="image/*"></label>
+      <label>Zoom <input id="zoom-b" type="range" min="1" max="3" step="0.01" value="1.35"></label>
+      <p class="hint">Drag the right half of the preview to pan the photo.</p>
+    </fieldset>
+
+    <button id="fill-both" type="button">Use left photo in both panels</button>
+    <button id="sample" type="button">Try a sample photo</button>
+
+    <fieldset class="panel-box">
+      <legend>Caption</legend>
+      <label>Text <input id="caption" type="text" maxlength="32" value="PALM NOIR"></label>
+      <label>Size <input id="caption-size" type="range" min="0.5" max="2" step="0.05" value="1"></label>
+      <label>Colour <input id="caption-color" type="color" value="#f5efe0"></label>
+      <label>Rim light <input id="caption-rim" type="color" value="#19e3d6"></label>
+      <label>Glow <input id="caption-glow" type="color" value="#ff7a1a"></label>
+    </fieldset>
+
+    <fieldset class="panel-box">
+      <legend>Export PNG</legend>
+      <div class="export-row">
+        <button id="export-square" type="button">1080 × 1080</button>
+        <button id="export-portrait" type="button">1080 × 1350</button>
+        <button id="export-wide" type="button">1920 × 1080</button>
+      </div>
+      <p class="hint">Exports render at full size, straight from the preview.</p>
+    </fieldset>
     <p id="status" role="status"></p>
   </section>
-  <canvas id="cover" width="1080" height="1080" aria-label="The cover"></canvas>
+
+  <section class="stage" aria-label="Cover preview">
+    <div class="drop-hint" id="drop-hint">Drop a photo onto the cover — left half fills the left panel, right half the right panel.</div>
+    <canvas id="cover" width="1080" height="1080" aria-label="The cover preview"></canvas>
+  </section>
 </main>
 <script type="module" src="./src/main.js"></script>
 </body>
